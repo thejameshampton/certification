@@ -1085,6 +1085,15 @@
         "image_2": {
           "label": "Second image"
         },
+        "videoOrImage": {
+          "label": "Show Video Instead"
+        },
+        "desktopVideo": {
+          "label": "Desktop Video"
+        },
+        "mobileVideo": {
+          "label": "Mobile Video"
+        },
         "image_overlay_opacity": {
           "label": "Image overlay opacity"
         },

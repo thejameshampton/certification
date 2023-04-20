@@ -153,6 +153,28 @@
 }
 
 /*!!!!!!!!!!!!!!!!!!TDS!!!!!!!!!!!!!!!!!!*/
+.footer__blocks-wrapper.grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.footer__blocks-wrapper.grid > * {
+    width: auto !important;
+    margin-block: 0 !important;
+}
+
+@media (max-width: 1000px) {
+    .footer__blocks-wrapper.grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 750px) {
+    .footer__blocks-wrapper.grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 .newsletter-form__button.field__button:before {
     pointer-events: none;
     content: "";
