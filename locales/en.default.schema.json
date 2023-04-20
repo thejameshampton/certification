@@ -452,6 +452,32 @@
               "label": "Link"
             }
           }
+        },
+        "countdown": {
+          "name": "Countdown",
+          "settings": {
+            "text": {
+              "label": "Text"
+            },
+            "text_alignment": {
+              "label": "Text alignment",
+              "options__1": {
+                "label": "Left"
+              },
+              "options__2": {
+                "label": "Center"
+              },
+              "options__3": {
+                "label": "Right"
+              }
+            },
+            "deadline": {
+              "label": "Deadline"
+            },
+            "link": {
+              "label": "Link"
+            }
+          }
         }
       }
     },
