@@ -1,0 +1,280 @@
+/****************************************** IMPORTANT NOTE ******************************************/
+/*
+    Most of these styles don't do anything in this file. I put these in the Custom CSS area 
+    for each section in the WYSIWYG editor. To make these styles accurately affect the 
+    correct section, I am using their section ID, and I don't know if their section ID can 
+    change or not so these are only here for reference. The sections that actually do 
+    something in this file will be marked with !!!!!!!!!!!!!!!!!!TDS!!!!!!!!!!!!!!!!!! until
+    !!!!!!!!!!!!!!!!!!End of TDS!!!!!!!!!!!!!!!!!!. TDS stands for This Does Something. 
+
+    Thank you for reviewing my work,
+    James Hampton
+*/
+
+
+
+/****************************************** Announcement Bar ******************************************/ 
+.announcement-bar-section * {
+    color: #f3f4f9;
+    font-size: calc(var(--font-heading-scale) * 1.5rem);
+}
+
+/****************************************** Image Banner ******************************************/ 
+#shopify-section-template--18594001191225__image_banner .banner__box {
+    padding-inline: 8.5rem;
+}
+
+/****************************************** Featured Collection ******************************************/ 
+#shopify-section-template--18594001191225__featured_collection .card__inner {
+    border: 2px solid #f6f6f7;
+}
+
+#shopify-section-template--18594001191225__featured_collection .card__information {
+    padding-top: 1.3rem;
+}
+
+#shopify-section-template--18594001191225__featured_collection .card__heading {
+    font-size: calc(var(--font-heading-scale) * 1.4rem);
+}
+
+#shopify-section-template--18594001191225__featured_collection .price {
+    margin-top: 1rem;
+    font-size: 1.8rem;
+}
+
+#shopify-section-template--18594001191225__featured_collection .price-item--regular {
+    font-size: 1.8rem;
+}
+
+#shopify-section-template--18594001191225__featured_collection .price-item {
+    margin-right: 0.3rem;
+}
+
+#shopify-section-template--18594001191225__featured_collection .card__badge span {
+    background: #9c572d;
+}
+
+/****************************************** Blog Posts ******************************************/ 
+#shopify-section-template--18594001191225__58e00e6f-28d9-4250-9eac-1bf50b62f9a4 .article-card {
+    background: #f6f6f6;
+}
+
+#shopify-section-template--18594001191225__58e00e6f-28d9-4250-9eac-1bf50b62f9a4 .card__inner {
+    --ratio-percent: 66.240964% !important;
+}
+
+#shopify-section-template--18594001191225__58e00e6f-28d9-4250-9eac-1bf50b62f9a4 .card__information {
+    padding-block: 2.9rem;
+    padding-left: 3rem;
+    padding-right: 2rem;
+    letter-spacing: 1px;
+}
+
+/****************************************** Image with Text ******************************************/ 
+#shopify-section-template--18594001191225__3879cdb3-c41b-4409-b376-4f91d876e8fd * {
+    border: none;
+    --color-button: #c0a18f;
+}
+
+#shopify-section-template--18594001191225__3879cdb3-c41b-4409-b376-4f91d876e8fd p {
+    letter-spacing: 1px;
+}
+
+#shopify-section-template--18594001191225__3879cdb3-c41b-4409-b376-4f91d876e8fd .button {
+    background: #c0a18f;
+}
+
+/****************************************** Collage ******************************************/ 
+#shopify-section-template--18594001191225__a8100930-be21-412e-8a5d-77a18020d07d * {
+    --grid-desktop-horizontal-spacing: 12px;
+    --grid-desktop-vertical-spacing: 12px;
+}
+
+#shopify-section-template--18594001191225__a8100930-be21-412e-8a5d-77a18020d07d .card {
+    border: 2px solid #f6f6f7;
+}
+
+@media (min-width: 750px) {
+    #shopify-section-template--18594001191225__a8100930-be21-412e-8a5d-77a18020d07d .collage {
+        grid-template-rows: 50% 50%;
+    }
+}
+
+#shopify-section-template--18594001191225__a8100930-be21-412e-8a5d-77a18020d07d .card__content {
+    margin-left: 3.5rem;
+    width: auto;
+}
+
+#shopify-section-template--18594001191225__a8100930-be21-412e-8a5d-77a18020d07d h3 {
+    font-size: calc(var(--font-heading-scale) * 1.5rem);
+    font-family: sans-serif;
+}
+
+#shopify-section-template--18594001191225__a8100930-be21-412e-8a5d-77a18020d07d .card__information {
+    padding-top: 1rem;
+}
+
+#shopify-section-template--18594001191225__a8100930-be21-412e-8a5d-77a18020d07d .price {
+    margin-top: 1rem;
+    font-size: 1.8rem;
+}
+
+
+
+/****************************************** Footer ******************************************/ 
+#shopify-section-sections--18594001420601__footer pre {
+    letter-spacing: 1px;
+}
+#shopify-section-sections--18594001420601__footer .footer-block--newsletter {
+    margin-top: 6rem;
+}
+
+#shopify-section-sections--18594001420601__footer #ContactFooter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    max-width: initial;
+}
+
+#shopify-section-sections--18594001420601__footer .newsletter-form__field-wrapper .field__input {
+    padding-right: 1.5rem;
+}
+
+#shopify-section-sections--18594001420601__footer .align-left {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#shopify-section-sections--18594001420601__footer .copyright__content {
+    font-size: 1.4rem;
+}
+
+/*!!!!!!!!!!!!!!!!!!TDS!!!!!!!!!!!!!!!!!!*/
+.newsletter-form__button.field__button:before {
+    pointer-events: none;
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: var(--inputs-radius-outset);
+    box-shadow: inset var(--inputs-shadow-horizontal-offset) var(--inputs-shadow-vertical-offset) var(--inputs-shadow-blur-radius) rgba(var(--color-base-text),var(--inputs-shadow-opacity));
+    z-index: -1;
+}
+
+.newsletter-form__button.field__button:after {
+    pointer-events: none;
+    content: "";
+    position: absolute;
+    top: var(--inputs-border-width);
+    right: var(--inputs-border-width);
+    bottom: var(--inputs-border-width);
+    left: var(--inputs-border-width);
+    border: 0.1rem solid transparent;
+    border-radius: var(--inputs-radius);
+    box-shadow: inset 0 0 0 var(--inputs-border-width) rgba(var(--color-foreground),var(--inputs-border-opacity));
+    transition: box-shadow var(--duration-short) ease;
+    z-index: 1;
+}
+
+.newsletter-form__button.field__button:hover.newsletter-form__button.field__button:after {
+    box-shadow: inset 0 0 0 calc(0.1rem + var(--inputs-border-width)) rgba(var(--color-foreground),var(--inputs-border-opacity));
+    outline: 0;
+    border-radius: var(--inputs-radius);
+}
+
+.newsletter-form__button {
+    position: relative !important;
+    left: 0px;
+    padding: 1.5rem 2.6rem !important;
+    width: auto !important;
+    width: auto;
+    font-size: 1.6rem;
+}
+
+.field__label {
+    left: calc(var(--inputs-border-width) + 1.6rem);
+}
+
+.list-payment__item:nth-child(1) {
+    order: 3;
+}
+
+.list-payment__item:nth-child(2) {
+    order: 5;
+}
+
+.list-payment__item:nth-child(3) {
+    order: 6;
+}
+
+.list-payment__item:nth-child(4) {
+    order: 2;
+}
+
+.list-payment__item:nth-child(5) {
+    order: 4;
+}
+
+.list-payment__item:nth-child(6) {
+    display: none; 
+}
+
+.list-payment__item:nth-child(6) {
+    order: 1;
+}
+
+.list-payment__item svg {
+    width: 39px;
+    height:auto;
+}
+
+.footer__content-top {
+    padding-bottom: 6rem;
+}
+
+.field:before,
+.select:before,
+.customer .field:before,
+.customer select:before,
+.localization-form__select:before {
+  box-shadow: inset var(--inputs-shadow-horizontal-offset) var(--inputs-shadow-vertical-offset) var(--inputs-shadow-blur-radius) rgba(var(--color-base-text), var(--inputs-shadow-opacity)) !important;
+}
+
+.field:after,
+.select:after,
+.customer .field:after,
+.customer select:after,
+.localization-form__select:after {
+  box-shadow: inset 0 0 0 var(--inputs-border-width) rgba(var(--color-foreground), var(--inputs-border-opacity)) !important;
+}
+
+.field:hover.field:after,
+.select:hover.select:after,
+.select__select:hover.select__select:after,
+.customer .field:hover.field:after,
+.customer select:hover.select:after,
+.localization-form__select:hover.localization-form__select:after {
+  box-shadow: inset 0 0 0 calc(0.1rem + var(--inputs-border-width)) rgba(var(--color-foreground),var(--inputs-border-opacity)) !important;
+}
+
+.field__input:focus-visible,
+.select__select:focus-visible,
+.customer .field input:focus-visible,
+.customer select:focus-visible,
+.localization-form__select:focus-visible.localization-form__select:after {
+  box-shadow: inset 0 0 0 calc(0.1rem + var(--inputs-border-width)) rgba(var(--color-foreground)) !important;
+}
+
+.field__input:focus,
+.select__select:focus,
+.customer .field input:focus,
+.customer select:focus,
+.localization-form__select:focus.localization-form__select:after {
+  box-shadow: inset 0 0 0 calc(0.1rem + var(--inputs-border-width)) rgba(var(--color-foreground)) !important;
+}
+/* !!!!!!!!!!!!!!!!!!End of TDS!!!!!!!!!!!!!!!!!! */
