@@ -416,7 +416,7 @@
             </button>
           </noscript>
 
-          <button
+          <buttonscript
             type="submit"
             id="CartDrawer-Checkout"
             class="cart__checkout-button button"
@@ -427,9 +427,161 @@
             {% endif %}
           >
             {{ 'sections.cart.checkout' | t }}
-          </button>
+          </buttonscript>
         </div>
       </div>
+      {% if settings.upsell_header != blank or settings.upsell_product != blank %}
+        <div id="UpsellTable">
+          {% if settings.upsell_header != blank %}
+            <h3>{{ settings.upsell_header  }}</h3>
+          {% endif %}
+          {% if settings.upsell_product != blank %}
+          <table class="cart-items" role="table">
+            <tbody role="rowgroup">
+              <tr id="Upsell-Item" class="cart-item" role="row">
+                <td class="cart-item__media" role="cell" headers="CartDrawer-ColumnProductImage">
+                  {% assign item = all_products[settings.upsell_product] %}
+                  {% if item.images %}
+                    <a href="{{ item.url }}" class="cart-item__link" tabindex="-1" aria-hidden="true"> </a>
+                    <img
+                      class="cart-item__image"
+                      src="{{ item.images[0] | image_url: width: 300 }}"
+                      alt="{{ item.images[0].alt | escape }}"
+                      loading="lazy"
+                      width="150"
+                      height="{{ 150 | divided_by: item.images[0].aspect_ratio | ceil }}"
+                    >
+                  {% endif %}
+                </td>
+
+                <td class="cart-item__details" role="cell" headers="CartDrawer-ColumnProduct">
+                  {%- if settings.show_vendor -%}
+                    <p class="caption-with-letter-spacing light">{{ item.product.vendor }}</p>
+                  {%- endif -%}
+                  <a href="{{ item.url }}" class="cart-item__name h4 break">
+                    {{- item.title | escape -}}
+                  </a>
+                  <div class="product-option">
+                    {{ item.price | money }}
+                  </div>
+                </td>
+
+                <td class="cart-item__totals right" role="cell" headers="CartDrawer-ColumnTotal">
+                  <div class="cart-item__price-wrapper">
+                      <span class="price price--end">
+                        {{ item.price | money }}
+                      </span>
+                  </div>
+                </td>
+
+                <td class="upsellWrapperButton">
+                  <div class="quick-add no-js-hidden">
+                    {%- liquid
+                      assign product_form_id = 'quick-add-' | append: section_id | append: item.id
+                      assign qty_rules = false
+                      if item.selected_or_first_available_variant.quantity_rule.min > 1 or item.selected_or_first_available_variant.quantity_rule.max != null or item.selected_or_first_available_variant.quantity_rule.increment > 1
+                        assign qty_rules = true
+                      endif
+                    -%}
+                      <product-form>
+                        {%- form 'product',
+                          item,
+                          id: product_form_id,
+                          class: 'form',
+                          novalidate: 'novalidate',
+                          data-type: 'add-to-cart-form'
+                        -%}
+                          <input
+                            type="hidden"
+                            name="id"
+                            value="{{ item.selected_or_first_available_variant.id }}"
+                            disabled
+                          >
+                          <button
+                            id="{{ product_form_id }}-submit"
+                            type="submit"
+                            name="add"
+                            class="quick-add__submit button button--full-width button--secondary{% if horizontal_quick_add %} card--horizontal__quick-add{% endif %}"
+                            aria-haspopup="dialog"
+                            aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ item.id }}"
+                            aria-live="polite"
+                            data-sold-out-message="true"
+                            {% if item.selected_or_first_available_variant.available == false %}
+                              disabled
+                            {% endif %}
+                          >
+                            <span>
+                              {%- if item.selected_or_first_available_variant.available -%}
+                                {{ 'products.product.add_to_cart' | t }}
+                              {%- else -%}
+                                {{ 'products.product.sold_out' | t }}
+                              {%- endif -%}
+                            </span>
+                            <span class="sold-out-message hidden">
+                              {{ 'products.product.sold_out' | t }}
+                            </span>
+                            {%- if horizontal_quick_add -%}
+                              <span class="icon-wrap">{% render 'icon-plus' %}</span>
+                            {%- endif -%}
+                            <div class="loading-overlay__spinner hidden">
+                              <svg
+                                aria-hidden="true"
+                                focusable="false"
+                                class="spinner"
+                                viewBox="0 0 66 66"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                              </svg>
+                            </div>
+                          </button>
+                        {%- endform -%}
+                      </product-form>
+                  </div>
+                  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+                  <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+                  <link rel="stylesheet" href="{{ 'quick-add.css' | asset_url }}" media="print" onload="this.media='all'">
+                  <script async>
+                    let oldLength;
+                    
+                    setInterval(visibilitySwitcher, 100);
+
+                    function visibilitySwitcher() {
+                      const tbody = document.getElementById("CartDrawer-CartItems").querySelector('tbody');
+                      const upsellTable = document.getElementById('UpsellTable');
+                      let upsellInCart;
+                      
+                      if(!tbody) {
+                        upsellTable.classList.remove('hidden');
+                        oldLength = 0;
+                      }
+                      else {
+                        const cartItems = Array.from(tbody.children);
+                        if(typeof oldLength === 'undefined' || cartItems.length != oldLength) {
+                          for(let i = 0; i < cartItems.length; i++) {
+                            const item = cartItems[i].querySelector('.cart-item__details a');
+                            const itemName = item.innerHTML;
+                            const upsellName = '{{ all_products[settings.upsell_product].title }}';
+                            if(itemName === upsellName) {
+                              upsellInCart = true;
+                              break;
+                            }
+                            if(i === cartItems.length - 1) upsellInCart = false;
+                          }
+                          oldLength = cartItems.length;
+                          if(upsellInCart ) upsellTable.classList.add('hidden');
+                          else upsellTable.classList.remove('hidden');
+                        }
+                      }
+                    }
+                  </script>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          {% endif %}
+        </div>
+      {% endif %}
     </div>
   </div>
 </cart-drawer>

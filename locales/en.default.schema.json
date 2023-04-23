@@ -356,7 +356,9 @@
           "collection": {
             "label": "Collection",
             "info": "Visible when cart drawer is empty."
-          }
+          },
+          "upsell_product": "Upsell Product",
+          "upsell_header": "Upsell Header"
         }
       }
     },

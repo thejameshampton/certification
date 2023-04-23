@@ -139,21 +139,47 @@
 
 <script>
   const loadVideo = {{ section.settings.videoOrImage }};
+  const desktopVideoBlank = {% if section.settings.desktopVideo == blank %}
+    true
+  {% else %}
+    false
+  {% endif%};
+  const mobileVideoBlank = {% if section.settings.mobileVideo == blank %}
+    true
+  {% else %}
+    false
+  {% endif%};
   const banner = document.getElementById('videoBanner');
-  let desktopVideoLoaded = false;
   let el;
 
-  if (loadVideo && window.innerWidth > 750) {
-    banner.innerHTML += '{{ section.settings.desktopVideo | video_tag: loop: true, class: 'bannerVideo desktopVideo', autoplay: true, controls: false, outline: false, controlsList: nofullscreen }}';
-  } else if (loadVideo && window.innerWidth <= 750) {
-    banner.innerHTML += '{{ section.settings.mobileVideo | video_tag: loop: true, class: 'bannerVideo mobileVideo', autoplay: true, controls: false, outline: false, controlsList: nofullscreen }}';
-    window.addEventListener("resize", () => {
-      if (loadVideo && window.innerWidth > 750) {
-        banner.innerHTML += '{{ section.settings.desktopVideo | video_tag: loop: true, class: 'bannerVideo desktopVideo', autoplay: true, controls: false, outline: false, controlsList: nofullscreen }}';
-        window.removeEventListener("resize", setVideo);
-      }
-    });
+  if (loadVideo && ! mobileVideoBlank && ! desktopVideoBlank) {
+    {% comment %}
+      console.log(1);{% endcomment %}
+    if (window.innerWidth > 750) {
+      banner.innerHTML += '{{ section.settings.desktopVideo | video_tag: loop: true, class: 'bannerVideo desktopVideo', autoplay: true, controls: false, outline: false, controlsList: nofullscreen }}';{% comment %}
+        console.log(2);{% endcomment %}
+  } else if (window.innerWidth <= 750) {
+    banner.innerHTML += '{{ section.settings.mobileVideo | video_tag: loop: true, class: 'bannerVideo mobileVideo', autoplay: true, controls: false, outline: false, controlsList: nofullscreen }}';{% comment %}
+      console.log(3);{% endcomment %}
+    window.addEventListener("resize", setVideo);
   }
+} else if (loadVideo && ! mobileVideoBlank && desktopVideoBlank) {
+  {% comment %}
+    console.log(4);{% endcomment %}banner.innerHTML += '{{ section.settings.mobileVideo | video_tag: loop: true, class: 'bannerVideo mobileVideo', autoplay: true, controls: false, outline: false, controlsList: nofullscreen }}';
+} else if (loadVideo && mobileVideoBlank && ! desktopVideoBlank) {
+  {% comment %}
+    console.log(5);{% endcomment %}banner.innerHTML += '{{ section.settings.desktopVideo | video_tag: loop: true, class: 'bannerVideo desktopVideo', autoplay: true, controls: false, outline: false, controlsList: nofullscreen }}';
+}
+
+function setVideo() {
+  {% comment %}
+    console.log(6);{% endcomment %}
+  if (loadVideo && window.innerWidth > 750) {
+    {% comment %}
+      console.log(7);{% endcomment %}banner.innerHTML += '{{ section.settings.desktopVideo | video_tag: loop: true, class: 'bannerVideo desktopVideo', autoplay: true, controls: false, outline: false, controlsList: nofullscreen }}';
+    window.removeEventListener("resize", setVideo);
+  }
+}
 </script>
 
 {% schema %}
